@@ -2,6 +2,9 @@ name: pygbag_build
 
 on: [workflow_dispatch]
 
+permissions:
+  contents: write
+
 jobs:
   build-pygbag:
     name: Build for Emscripten pygbag runtime
