@@ -8,7 +8,7 @@ This project showcases:
 * Collision detection with uneven terrain
 * Terrain height adjustment using collision rays
 * A fully rotatable third-person camera
-* Cross-platform packaging with `build_apps` (desktop) and web deployment using `pygbag`
+* web deployment using `pygbag`
 
 Based on the classic **“Roaming Ralph”** tutorial.
 
@@ -69,9 +69,11 @@ Based on the classic **“Roaming Ralph”** tutorial.
 ```
 Ralph/
 │
+├── .github/
+│   └── workflows/
+│       └── pygbag.yml
+│
 ├── main.py
-├── setup.py
-├── requirements.txt
 ├── models/
 │   ├── ralph.egg
 │   ├── ralph-run.egg
@@ -87,13 +89,14 @@ Ralph/
 
 ## ⚙️ Requirements
 
-* Python 3.13+
-* Panda3D 1.10.16
+* Python
+* Panda3D
+* Pygbag
 
 Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install panda3d pygbag
 ```
 
 ---
@@ -103,55 +106,12 @@ pip install -r requirements.txt
 From the project root:
 
 ```bash
-py main.py
-```
-
-If everything loads correctly, you should see:
-
-```
-Known pipe types:
-  wglGraphicsPipe
-(all display modules loaded.)
-```
-
----
-
-## 🏗️ Building Packages
-
-### Desktop (Standalone Executables)
-
-This project uses Panda3D’s `build_apps` system for native desktop bundles.
-
-Build for all supported platforms:
-
-```bash
-python setup.py build_apps
-```
-
-Platforms built:
-
-* manylinux2014_x86_64
-* macOS (10.13+)
-* Windows (win_amd64)
-
-Output is generated in the `build/` directory, for example:
-
-```
-build/macosx_10_13_x86_64/Ralph.app          # macOS
-build/win_amd64/                             # Windows runnable folder
+pygbag main.py
 ```
 
 ---
 
 ## 🕸️ Web Build (pygbag)
-
-A lightweight web-version of Ralph is generated with **pygbag**, which compiles the app using Emscripten so it runs in the browser.
-
-* A GitHub Actions workflow (`.github/workflows/pygbag.yml`) is provided and can be triggered manually. It installs `pygbag` then runs:
-  ```sh
-  python -m pygbag --build --ume_block 0 $GITHUB_WORKSPACE/main.py
-  ```
-* The resulting files are published to the `gh-pages` branch by the action; the playable build lives under `build/web` in the repository.
 
 You can also install pygbag locally and build yourself:
 
