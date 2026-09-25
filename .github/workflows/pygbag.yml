@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'main.py'
-      - '**.ini'
+      - 'pygbag.ini'
       - '.github/workflows/pygbag.yml'
   workflow_dispatch:
 
