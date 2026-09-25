@@ -3,12 +3,9 @@ name: pygbag_build
 on:
   push:
     paths:
-      - '**.py'
-      - '**.spec'
+      - 'main.py'
       - '**.ini'
-      - 'requirements.txt'
-      - 'setup.py'
-      - '.github/workflows/*.yml'
+      - '.github/workflows/pygbag.yml'
   workflow_dispatch:
 
 permissions:
@@ -18,7 +15,6 @@ jobs:
   build-pygbag:
     name: Build for Emscripten pygbag runtime
     runs-on: ubuntu-latest
-
 
     steps:
     - uses: actions/checkout@v2
@@ -32,12 +28,3 @@ jobs:
       with:
         branch: gh-pages
         folder: build/web
-
-    - name: Setup Butler
-      uses: remarkablegames/setup-butler@v1
-
-    - name: Publish HTML to itch.io via Butler
-      env:
-        BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-      run: |
-        butler push build/web shivamkr12/roaming-ralph:html --userversion web-v1.0.${{ github.run_number }}
